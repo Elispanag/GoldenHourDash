@@ -34,7 +34,7 @@ public class GameManager : MonoBehaviour
         }
     }
 
-    void EndGame()
+    public void EndGame()
     {
         if (gameOverScreen != null)
         {
