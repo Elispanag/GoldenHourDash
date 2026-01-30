@@ -14,7 +14,9 @@ public class GameManager : MonoBehaviour
 
     public Transform player;
     public TextMeshProUGUI finalScoreText;
-
+    public bool gameHasEnded = false;
+    public float restartDelay = 2f;
+    
 
     void Start()
     {
@@ -36,16 +38,35 @@ public class GameManager : MonoBehaviour
 
     public void EndGame()
     {
-        if (gameOverScreen != null)
-        {
-            gameOverScreen.SetActive(true);
-        }
+        if (gameHasEnded) return;
+        gameHasEnded = true;
+        Debug.Log("Game Over!");
+
         if (player !=null && finalScoreText !=null)
         {
             float score = player.position.z;
             finalScoreText.text = "Final Score: " + score.ToString("F0"); // FO means no decimal places
         }
-        Time.timeScale = 0f; // Pause the game
+
+        if (gameOverScreen != null)
+        {
+            gameOverScreen.SetActive(true);
+        }
+        
+        if (player != null)
+        {
+            player.GetComponent<PlayerMovement>().enabled = false;
+
+            Rigidbody rb = player.GetComponent<Rigidbody>();
+            if (rb != null)
+            {
+                rb.linearVelocity = Vector3.zero; // Stop all movement
+                rb.angularVelocity = Vector3.zero; // Stop all rotation
+                rb.useGravity = false; // Disable gravity
+                rb.isKinematic = true; // Stops reacting to physics
+            }
+        }
+       
     }
     public void RestartGame()
     {

@@ -17,8 +17,6 @@ public class PlayerMovement : MonoBehaviour
     public float jumpForce = 7f;
     private float nextDifficultyMilestone = 300f;
     private bool isGrounded = true;
-
-
     
 
     void Update()
@@ -55,12 +53,10 @@ public class PlayerMovement : MonoBehaviour
         // Death condition
         if (rb.position.y < -1f)
         {
-            FindObjectOfType<GameManager>().EndGame();
+            FindFirstObjectByType<GameManager>().EndGame();
         }
 
     }
-
-    
     void IncreaseDifficulty()
     {
        forwardForce += 2000f; // Increase forward force

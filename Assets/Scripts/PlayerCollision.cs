@@ -11,7 +11,7 @@ public class PlayerCollision : MonoBehaviour
         //Check if player has fallen below threshold
         if (transform.position.y < fallThreshold)
         {
-           SceneManager.LoadScene(SceneManager.GetActiveScene().name);
+           gameManager.EndGame();
         }
     }
     void OnCollisionEnter(Collision collisionInfo)
