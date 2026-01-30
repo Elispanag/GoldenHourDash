@@ -10,11 +10,16 @@ public class PlayerMovement : MonoBehaviour
     public float sidewaysForce = 500f;
 
     public GameObject speedMessageUI;
-    private float nextDifficultyMilestone = 300f;
+
+    public AudioSource levelUpSound;
 
     // Jump
     public float jumpForce = 7f;
+    private float nextDifficultyMilestone = 300f;
     private bool isGrounded = true;
+
+
+    
 
     void Update()
     {
@@ -55,10 +60,17 @@ public class PlayerMovement : MonoBehaviour
 
     }
 
+    
     void IncreaseDifficulty()
     {
-       forwardForce += 200f; // Increase forward force
-       nextDifficultyMilestone += 300f; // Set next milestone  
+       forwardForce += 2000f; // Increase forward force
+       nextDifficultyMilestone += 300f; // Set next milestone 
+
+       //Sound effect
+       if (levelUpSound != null)
+        {
+            levelUpSound.Play();
+        } 
 
        StartCoroutine(ShowMessage());
     }
